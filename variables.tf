@@ -117,6 +117,12 @@ variable "private_service_connection_is_manual" {
   default     = false
 }
 
+variable "geo_redundant_backup_enabled" {
+  type        = bool
+  description = "Whether geo-redundant backup is enabled for the PostgreSQL Flexible Server."
+  default     = true
+}
+
 variable "databases" {
   type = map(object({
     charset            = optional(string, "UTF8")
