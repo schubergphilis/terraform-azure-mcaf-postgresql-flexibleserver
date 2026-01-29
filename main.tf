@@ -89,8 +89,8 @@ module "database" {
 
   source = "./modules/database"
 
-  postgresql_server_id = azurerm_postgresql_flexible_server.this.id
-  name = each.key
+  postgresql_server_id                     = azurerm_postgresql_flexible_server.this.id
+  name                                     = each.key
   postgresql_server_administrator_username = each.value.administrator_username
 
 }
