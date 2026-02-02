@@ -10,11 +10,26 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">= 3.0"
     }
+    postgresql = {
+      source  = "cyrilgdn/postgresql"
+      version = ">= 1.25.0"
+    }
   }
 }
 
 provider "azurerm" {
   features {}
+}
+
+provider "postgresql" {
+  alias           = "database"
+  host            = module.postgresql.fqdn
+  port            = 5432
+  username        = module.postgresql.administrator_username
+  password        = module.postgresql.administrator_password
+  sslmode         = "require"
+  connect_timeout = 15
+  superuser       = false
 }
 
 resource "azurerm_resource_group" "example" {
@@ -81,6 +96,10 @@ data "azurerm_client_config" "current" {}
 
 module "postgresql" {
   source = "../../"
+
+  providers = {
+    postgresql.database = postgresql.database
+  }
 
   name                = "psql-example-complete"
   resource_group_name = azurerm_resource_group.example.name
