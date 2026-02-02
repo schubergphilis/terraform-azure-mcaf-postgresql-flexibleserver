@@ -60,9 +60,16 @@ variable "storage_size" {
   default     = 32
 }
 
-variable "subnet_id" {
+variable "delegated_subnet_id" {
   type        = string
-  description = "The subnet id to use for the private endpoint of the postgresql server."
+  description = "The ID of the delegated subnet for the PostgreSQL Flexible Server. This subnet must have the 'Microsoft.DBforPostgreSQL/flexibleServers' service delegation."
+  default     = null
+}
+
+variable "private_dns_zone_id" {
+  type        = string
+  description = "The ID of the private DNS zone for the PostgreSQL Flexible Server. Required when using a delegated subnet."
+  default     = null
 }
 
 variable "tf_azurerm_mid_name" {
