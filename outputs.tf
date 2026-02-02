@@ -4,7 +4,6 @@ output "id" {
 
 output "fqdn" {
   value      = azurerm_postgresql_flexible_server.this.fqdn
-  depends_on = [azurerm_private_endpoint.this]
 }
 
 output "administrator_username" {
