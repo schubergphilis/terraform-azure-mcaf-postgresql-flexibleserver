@@ -132,8 +132,8 @@ variable "geo_redundant_backup_enabled" {
 
 variable "databases" {
   type = map(object({
-    charset            = optional(string, "UTF8")
-    collation          = optional(string, "en_US.utf8")
+    charset                = optional(string, "UTF8")
+    collation              = optional(string, "en_US.utf8")
     administrator_username = optional(string)
 
     reader_groups = optional(list(object({
