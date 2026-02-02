@@ -9,6 +9,8 @@ resource "azurerm_postgresql_flexible_server" "this" {
   administrator_password        = random_password.password.result
   backup_retention_days         = var.backup_retention_days
   create_mode                   = "Default" # TODO: support DR scenarios
+  delegated_subnet_id           = var.delegated_subnet_id
+  private_dns_zone_id           = var.private_dns_zone_id
   public_network_access_enabled = var.public_network_access_enabled
   sku_name                      = var.sku
   storage_mb                    = local.storage_mb
@@ -52,25 +54,6 @@ resource "random_password" "password" {
   length           = 48
   special          = true
   override_special = var.use_password_override_special ? "!#$&()-_=+[]{}?" : null
-}
-
-resource "azurerm_private_endpoint" "this" {
-  name                = "${var.name}-pep"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-
-  subnet_id = var.subnet_id
-
-  private_service_connection {
-    is_manual_connection           = var.private_service_connection_is_manual
-    name                           = "${var.name}-psc"
-    subresource_names              = ["postgresqlServer"]
-    private_connection_resource_id = azurerm_postgresql_flexible_server.this.id
-  }
-
-  lifecycle {
-    ignore_changes = [private_dns_zone_group]
-  }
 }
 
 resource "azurerm_postgresql_flexible_server_active_directory_administrator" "this" {
