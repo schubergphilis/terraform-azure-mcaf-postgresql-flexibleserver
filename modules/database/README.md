@@ -35,15 +35,12 @@ No modules.
 | [postgresql_default_privileges.local_owner_future_sequence_rights_own_role](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/default_privileges) | resource |
 | [postgresql_default_privileges.local_owner_future_table_rights_admin_account](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/default_privileges) | resource |
 | [postgresql_default_privileges.local_owner_future_table_rights_own_role](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/default_privileges) | resource |
-| [postgresql_default_privileges.local_owner_future_type_rights_admin_account](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/default_privileges) | resource |
-| [postgresql_default_privileges.local_owner_future_type_rights_own_role](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/default_privileges) | resource |
 | [postgresql_grant.create_usage_on_schema](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.local_owner_create_usage_on_schema](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.local_owner_database_connect](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.local_owner_function_rights](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.local_owner_sequence_rights](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.local_owner_table_rights](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
-| [postgresql_grant.local_owner_type_rights](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_grant.table_rights](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_role.admin](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/role) | resource |
 | [postgresql_role.local_owner](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/role) | resource |
@@ -68,7 +65,7 @@ No modules.
 | <a name="input_admin_identity_object_ids"></a> [admin\_identity\_object\_ids](#input\_admin\_identity\_object\_ids) | n/a | <pre>list(object({<br/>    object_id      = string<br/>    principal_name = string<br/>    role_prefix    = optional(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_charset"></a> [charset](#input\_charset) | The charset of the postgresql database. | `string` | `"UTF8"` | no |
 | <a name="input_collation"></a> [collation](#input\_collation) | The collation of the postgresql database. | `string` | `"en_US.utf8"` | no |
-| <a name="input_local_owner_account"></a> [local\_owner\_account](#input\_local\_owner\_account) | Local PostgreSQL account with owner access for applications that do not support AD authentication. Password is auto-generated. | <pre>object({<br/>    username = string<br/>  })</pre> | `null` | no |
+| <a name="input_local_owner_account"></a> [local\_owner\_account](#input\_local\_owner\_account) | Local PostgreSQL account with owner access for applications that do not support AD authentication. Set generate\_password to false if password will be managed outside of Terraform. | <pre>object({<br/>    username          = string<br/>    generate_password = optional(bool, true)<br/>  })</pre> | `null` | no |
 | <a name="input_reader_groups"></a> [reader\_groups](#input\_reader\_groups) | n/a | <pre>list(object({<br/>    role_prefix = optional(string)<br/>    group_name  = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_reader_managed_identity_object_ids"></a> [reader\_managed\_identity\_object\_ids](#input\_reader\_managed\_identity\_object\_ids) | n/a | <pre>list(object({<br/>    object_id      = string<br/>    principal_name = string<br/>    role_prefix    = optional(string)<br/>  }))</pre> | `[]` | no |
 | <a name="input_writer_groups"></a> [writer\_groups](#input\_writer\_groups) | n/a | <pre>list(object({<br/>    group_name  = string<br/>    role_prefix = optional(string)<br/>  }))</pre> | `[]` | no |
@@ -79,6 +76,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_id"></a> [id](#output\_id) | n/a |
-| <a name="output_local_owner_account"></a> [local\_owner\_account](#output\_local\_owner\_account) | Local PostgreSQL owner account credentials. Store these securely. |
+| <a name="output_local_owner_account"></a> [local\_owner\_account](#output\_local\_owner\_account) | Local PostgreSQL owner account credentials. Password is null if generate\_password was set to false. |
 | <a name="output_name"></a> [name](#output\_name) | n/a |
 <!-- END_TF_DOCS -->
