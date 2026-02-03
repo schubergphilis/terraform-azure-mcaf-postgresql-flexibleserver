@@ -14,5 +14,9 @@ terraform {
       version               = ">= 1.25.0, < 2.0.0"
       configuration_aliases = [postgresql.database]
     }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.6.0, < 4.0.0"
+    }
   }
 }

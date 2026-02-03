@@ -142,6 +142,11 @@ module "postgresql" {
       charset   = "UTF8"
       collation = "en_US.utf8"
 
+      # Local account for applications that do not support AD authentication
+      local_owner_account = {
+        username = "app_production_owner"
+      }
+
       admin_groups = [
         {
           group_name  = "Database-Admins"
