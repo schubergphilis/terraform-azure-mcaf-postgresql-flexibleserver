@@ -72,10 +72,6 @@ variable "private_dns_zone_id" {
   default     = null
 }
 
-variable "tf_azurerm_mid_name" {
-  type = string
-}
-
 variable "use_password_override_special" {
   description = "Set true to use '!#$&()-_=+[]{}?' as special characters, false for default behavior."
   type        = bool
