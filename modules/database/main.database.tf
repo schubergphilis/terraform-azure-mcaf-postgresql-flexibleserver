@@ -205,17 +205,6 @@ resource "postgresql_grant" "local_owner_function_rights" {
   privileges  = ["ALL"]
 }
 
-resource "postgresql_grant" "local_owner_type_rights" {
-  provider = postgresql.database
-  count    = local.create_local_owner ? 1 : 0
-
-  database    = azurerm_postgresql_flexible_server_database.this.name
-  role        = postgresql_role.local_owner[0].name
-  object_type = "type"
-  schema      = "public"
-  privileges  = ["USAGE"]
-}
-
 resource "postgresql_default_privileges" "local_owner_future_table_rights_own_role" {
   provider = postgresql.database
   count    = local.create_local_owner ? 1 : 0
@@ -285,30 +274,6 @@ resource "postgresql_default_privileges" "local_owner_future_function_rights_adm
   owner       = var.postgresql_server_administrator_username
   object_type = "function"
   privileges  = ["ALL"]
-  role        = postgresql_role.local_owner[0].name
-}
-
-resource "postgresql_default_privileges" "local_owner_future_type_rights_own_role" {
-  provider = postgresql.database
-  count    = local.create_local_owner ? 1 : 0
-
-  database    = azurerm_postgresql_flexible_server_database.this.name
-  schema      = "public"
-  owner       = postgresql_role.local_owner[0].name
-  object_type = "type"
-  privileges  = ["USAGE"]
-  role        = postgresql_role.local_owner[0].name
-}
-
-resource "postgresql_default_privileges" "local_owner_future_type_rights_admin_account" {
-  provider = postgresql.database
-  count    = local.create_local_owner ? 1 : 0
-
-  database    = azurerm_postgresql_flexible_server_database.this.name
-  schema      = "public"
-  owner       = var.postgresql_server_administrator_username
-  object_type = "type"
-  privileges  = ["USAGE"]
   role        = postgresql_role.local_owner[0].name
 }
 
