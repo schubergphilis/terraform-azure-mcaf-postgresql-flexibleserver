@@ -57,14 +57,14 @@ resource "random_password" "password" {
 }
 
 resource "azurerm_postgresql_flexible_server_active_directory_administrator" "this" {
-  for_each = { for v in local.active_directory_administrators : v.object_id => v }
+  for_each = data.azuread_group.active_directory_administrator_groups
 
   server_name         = azurerm_postgresql_flexible_server.this.name
   resource_group_name = var.resource_group_name
   tenant_id           = data.azurerm_client_config.current.tenant_id
   object_id           = each.value.object_id
-  principal_name      = each.value.principal_name
-  principal_type      = each.value.principal_type
+  principal_name      = each.value.display_name
+  principal_type      = "Group"
 }
 
 module "database" {

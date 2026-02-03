@@ -106,6 +106,4 @@ module "postgresql" {
     key_vault_key_id                  = azurerm_key_vault_key.example.id
     primary_user_assigned_identity_id = azurerm_user_assigned_identity.example.id
   }
-
-  tf_azurerm_mid_name = azurerm_user_assigned_identity.example.name
 }

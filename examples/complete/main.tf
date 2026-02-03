@@ -131,8 +131,6 @@ module "postgresql" {
     primary_user_assigned_identity_id = azurerm_user_assigned_identity.postgresql.id
   }
 
-  tf_azurerm_mid_name = azurerm_user_assigned_identity.postgresql.name
-
   # Active Directory administrator groups
   active_directory_administrator_groups = [
     "PostgreSQL-Admins"
