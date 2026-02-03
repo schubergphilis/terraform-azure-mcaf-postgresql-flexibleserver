@@ -71,5 +71,6 @@ locals {
     }
   )
 
-  create_local_owner = var.local_owner_account != null
+  create_local_owner    = var.local_owner_account != null
+  generate_owner_password = local.create_local_owner && var.local_owner_account.generate_password
 }
