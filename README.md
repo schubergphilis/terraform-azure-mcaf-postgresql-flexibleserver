@@ -62,7 +62,6 @@ If you want to learn more about creating good readme files then refer the follow
 | <a name="input_name"></a> [name](#input\_name) | The name of the postgresql server. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the postgresql server will be created. | `string` | n/a | yes |
 | <a name="input_sku"></a> [sku](#input\_sku) | The sku of the postgresql server. | `string` | n/a | yes |
-| <a name="input_tf_azurerm_mid_name"></a> [tf\_azurerm\_mid\_name](#input\_tf\_azurerm\_mid\_name) | n/a | `string` | n/a | yes |
 | <a name="input_active_directory_administrator_groups"></a> [active\_directory\_administrator\_groups](#input\_active\_directory\_administrator\_groups) | n/a | `list(string)` | `[]` | no |
 | <a name="input_active_directory_auth_enabled"></a> [active\_directory\_auth\_enabled](#input\_active\_directory\_auth\_enabled) | Whether Active Directory authentication is enabled for the PostgreSQL Flexible Server. | `bool` | `true` | no |
 | <a name="input_administrator_username"></a> [administrator\_username](#input\_administrator\_username) | n/a | `string` | `"sbp_administrator"` | no |
