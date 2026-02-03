@@ -141,11 +141,11 @@ resource "postgresql_role" "local_owner" {
   password = local.generate_owner_password ? random_password.local_owner[0].result : null
 
   # Security hardening - principle of least privilege
-  superuser   = false
-  createdb    = false
-  createrole  = false
-  inherit     = true
-  replication = false
+  superuser       = false
+  create_database = false
+  create_role     = false
+  inherit         = true
+  replication     = false
 
   depends_on = [azurerm_postgresql_flexible_server_database.this]
 }
