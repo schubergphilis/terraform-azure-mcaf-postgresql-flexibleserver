@@ -132,6 +132,10 @@ variable "databases" {
     collation              = optional(string, "en_US.utf8")
     administrator_username = optional(string)
 
+    local_owner_account = optional(object({
+      username = string
+    }))
+
     reader_groups = optional(list(object({
       group_name  = string
       role_prefix = optional(string)
@@ -200,5 +204,8 @@ variable "databases" {
       - `object_id`      - (Required) The object ID of the managed identity.
       - `principal_name` - (Required) The principal name of the managed identity.
       - `role_prefix`    - (Optional) A prefix for the database role name.
+
+    - `local_owner_account` - (Optional) A local PostgreSQL account with owner access for applications that do not support AD authentication.
+      - `username` - (Required) The username for the local account. Password is auto-generated.
   DOC
 }

@@ -78,6 +78,15 @@ module "database" {
 
   postgresql_server_id                     = azurerm_postgresql_flexible_server.this.id
   name                                     = each.key
-  postgresql_server_administrator_username = each.value.administrator_username
+  charset                                  = each.value.charset
+  collation                                = each.value.collation
+  postgresql_server_administrator_username = coalesce(each.value.administrator_username, var.administrator_username)
 
+  reader_groups                      = each.value.reader_groups
+  reader_managed_identity_object_ids = each.value.reader_managed_identity_object_ids
+  writer_groups                      = each.value.writer_groups
+  writer_managed_identity_object_ids = each.value.writer_managed_identity_object_ids
+  admin_groups                       = each.value.admin_groups
+  admin_identity_object_ids          = each.value.admin_identity_object_ids
+  local_owner_account                = each.value.local_owner_account
 }
