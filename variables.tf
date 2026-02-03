@@ -133,7 +133,8 @@ variable "databases" {
     administrator_username = optional(string)
 
     local_owner_account = optional(object({
-      username = string
+      username          = string
+      generate_password = optional(bool, true)
     }))
 
     reader_groups = optional(list(object({
@@ -206,6 +207,7 @@ variable "databases" {
       - `role_prefix`    - (Optional) A prefix for the database role name.
 
     - `local_owner_account` - (Optional) A local PostgreSQL account with owner access for applications that do not support AD authentication.
-      - `username` - (Required) The username for the local account. Password is auto-generated.
+      - `username`          - (Required) The username for the local account.
+      - `generate_password` - (Optional) Whether to auto-generate a password. Defaults to `true`. Set to `false` if password will be managed outside of Terraform.
   DOC
 }

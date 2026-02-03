@@ -77,8 +77,9 @@ variable "postgresql_server_administrator_username" {
 
 variable "local_owner_account" {
   type = object({
-    username = string
+    username          = string
+    generate_password = optional(bool, true)
   })
-  description = "Local PostgreSQL account with owner access for applications that do not support AD authentication. Password is auto-generated."
+  description = "Local PostgreSQL account with owner access for applications that do not support AD authentication. Set generate_password to false if password will be managed outside of Terraform."
   default     = null
 }

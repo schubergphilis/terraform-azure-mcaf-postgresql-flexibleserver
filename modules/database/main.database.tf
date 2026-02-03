@@ -125,7 +125,7 @@ resource "postgresql_security_label" "admin" {
 
 # Local owner account for applications that do not support AD authentication
 resource "random_password" "local_owner" {
-  count = local.create_local_owner ? 1 : 0
+  count = local.generate_owner_password ? 1 : 0
 
   length           = 32
   special          = true
@@ -138,7 +138,7 @@ resource "postgresql_role" "local_owner" {
 
   name     = var.local_owner_account.username
   login    = true
-  password = random_password.local_owner[0].result
+  password = local.generate_owner_password ? random_password.local_owner[0].result : null
 
   # Security hardening - principle of least privilege
   superuser   = false
