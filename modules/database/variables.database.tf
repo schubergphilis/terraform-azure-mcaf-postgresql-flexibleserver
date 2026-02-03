@@ -74,3 +74,11 @@ variable "admin_identity_object_ids" {
 variable "postgresql_server_administrator_username" {
   type = string
 }
+
+variable "local_owner_account" {
+  type = object({
+    username = string
+  })
+  description = "Local PostgreSQL account with owner access for applications that do not support AD authentication. Password is auto-generated."
+  default     = null
+}

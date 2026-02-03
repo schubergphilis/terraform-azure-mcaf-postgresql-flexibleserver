@@ -70,4 +70,6 @@ locals {
       }
     }
   )
+
+  create_local_owner = var.local_owner_account != null
 }
